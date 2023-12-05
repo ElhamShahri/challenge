@@ -1,0 +1,12 @@
+
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: local('HelveticaNeue'),
+    url(./assets/fonts/HelveticaNeueMed.ttf) format("truetype");
+}
+
+/* @font-face {
+    font-family: 'HelveticaNeue';
+    src: local('HelveticaNeue'),
+      url(./assets/fonts/HelveticaNeue.ttf) format("truetype");
+  } */
