@@ -23,6 +23,7 @@ export default {
       "slate-gray": "#818a91",
       "water-blue": "#1c7cd5",
       silver: "#eceeef",
+      white: "#ffffff",
     },
   },
   plugins: [],
