@@ -13,7 +13,7 @@ export default function ArvanRoutes() {
   return (
     <Routes>
       <Route path="/" element={<PrivateRoute />}>
-        {/* <Route path="/" element={<Cargoes />} /> */}
+        <Route path="/" element={<AllPostScreen />} />
         <Route path="/articles/page/:page" element={<AllPostScreen />} />
         <Route path="/article/create" element={<NewArticle />} />
       </Route>

@@ -3,15 +3,9 @@ import react from "@vitejs/plugin-react";
 import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-
-    }
-  },
-  plugins: [react()]
+  plugins: [react()],
+  server:{
+    port:3000,
+  }
 
 });
