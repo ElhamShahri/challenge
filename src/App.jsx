@@ -1,15 +1,18 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Header from "./components/layouts/header";
-import Register from "./components/templates/Register";
+import { Component, useState } from "react";
+import ErrorBoundary from "./components/modules/ErrorBoundary";
+import ArvanRoutes from "./routes";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
+
 
   return (
     <>
-      <Register />
+      <BrowserRouter>
+        <ErrorBoundary>
+          <ArvanRoutes />
+        </ErrorBoundary>
+      </BrowserRouter>
     </>
   );
 }

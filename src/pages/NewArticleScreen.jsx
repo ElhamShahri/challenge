@@ -1,6 +1,5 @@
 import MainLayout from "../components/layouts/MainLayout";
-import ArticleForm from "../components/modules/ArticleForm";
-import PostsTable from "../components/modules/PostsTable";
+import ArticleForm from "../components/templates/ArticleForm";
 
 const NewArticle = () => {
   return (

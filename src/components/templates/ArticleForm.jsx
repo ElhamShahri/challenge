@@ -1,8 +1,9 @@
-import TagsSection from "./Tags";
+import Tags from "../modules/Tags";
+
 
 const ArticleForm = () => {
   return (
-    <div className="w-full ">
+    <div className="w-full  ">
       <form>
         <div className="flex flex-col md:flex-row ">
           {/* form */}
@@ -27,10 +28,11 @@ const ArticleForm = () => {
             <textarea   className="mb-3 rounded p-2 border border-1 border-[#dddddd]" name="content"  rows="6"></textarea>
           </div>
           {/* tag */}
-          <div className="w-full md:w-1/3">
-            <TagsSection />
+          <div className="w-full md:w-1/3 mb-5">
+            <Tags/>
           </div>
         </div>
+        <button className="mb-4 bg-water-blue px-6 py-2 rounded text-white">submit</button>
       </form>
     </div>
   );
