@@ -1,0 +1,38 @@
+import TagsSection from "./Tags";
+
+const ArticleForm = () => {
+  return (
+    <div className="w-full ">
+      <form>
+        <div className="flex flex-col md:flex-row ">
+          {/* form */}
+          <div className="w-full md:w-2/3 flex flex-col me-3">
+            <div className=" w-full flex flex-col mb-6">
+            <label className="mb-3 ms-1 text-charcoal-grey">Title</label>
+            <input
+              className=" rounded p-2 border border-1 border-[#dddddd]"
+              placeholder="Title"
+            />
+            <div className="mt-1 ">
+                {/* console.error(); */}
+            </div>
+            </div>
+       
+            <label className="mb-3 ms-1 text-charcoal-grey">Description</label>
+            <input
+              className="mb-6 rounded p-2 border border-1 border-[#dddddd]"
+              placeholder="Description"
+            />
+            <label className="mb-3 ms-1 text-charcoal-grey">Body</label>
+            <textarea   className="mb-3 rounded p-2 border border-1 border-[#dddddd]" name="content"  rows="6"></textarea>
+          </div>
+          {/* tag */}
+          <div className="w-full md:w-1/3">
+            <TagsSection />
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+export default ArticleForm;
