@@ -13,3 +13,7 @@ export function editArticle(slug,article) {
   export function deleteArticle(slug) {
     return http.delete(`/articles/${slug}`);
   }
+
+  export function getTags() {
+    return http.get("/tags");
+  }
