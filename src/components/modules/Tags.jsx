@@ -15,16 +15,10 @@ const Tags = ({ data }) => {
     console.log(tagswithState);
   }, [tagswithState]);
 
-  // const [checkboxState, setCheckboxState] = useState(
-  //   new Array(data.length).fill(false)
-  // );
-
-  // const [TagswithState, setTagsWithState] = useState();
-  //
   const handleCheckboxChange = (event) => {
     const name = event.target.name;
     const isChecked = event.target.checked;
-    
+
     setTagswithState((prevState) =>
       prevState.map((item) =>
         item.name === name
@@ -50,18 +44,20 @@ const Tags = ({ data }) => {
       />
       <div className="w-full h-auto md:h-80 border border-1 rounded border-[#dddddd] flex flex-col justify-center p-4 overflow-y-scroll">
         {tagswithState &&
-          tagswithState.map((item, index) => (
-            <div className="" key={index}>
-              <input
-                className="m-2 cursor-pointer"
-                type="checkbox"
-                name={item.name}
-                checked={item.checked}
-                onChange={handleCheckboxChange}
-              />
-              {item.name}
-            </div>
-          ))}
+          tagswithState
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((item, index) => (
+              <div className="" key={index}>
+                <input
+                  className="m-2 cursor-pointer"
+                  type="checkbox"
+                  name={item.name}
+                  checked={item.checked}
+                  onChange={handleCheckboxChange}
+                />
+                {item.name}
+              </div>
+            ))}
       </div>
     </div>
   );
