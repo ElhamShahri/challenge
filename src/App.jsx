@@ -9,9 +9,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <ErrorBoundary> */}
+        <ErrorBoundary>
           <ArvanRoutes />
-        {/* </ErrorBoundary> */}
+        </ErrorBoundary>
       </BrowserRouter>
     </>
   );
