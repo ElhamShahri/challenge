@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import Tags from "../modules/Tags";
 
 const ArticleForm = ({ tags }) => {
-  const [listOfNewTags, setListOfNewTags] = useState();
-
-  useEffect(() => {}, [listOfNewTags]);
 
   return (
     <div className="w-full">
