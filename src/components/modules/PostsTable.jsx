@@ -1,4 +1,7 @@
-const PostsTable = () => {
+import convertHelpers from "../../utils/helpers/convert.helpers";
+
+const PostsTable = ({ articles }) => {
+
   return (
     <div className="w-full ">
       <table className="w-full overflow-auto">
@@ -13,19 +16,24 @@ const PostsTable = () => {
             <th className="text-left px-3 py-2">Created</th>
           </tr>
         </thead>
-        <tr>
-          <td className="text-left px-3 py-2">1</td>
-          <td className="text-left px-3 py-2">Article title</td>
-          <td className="text-left px-3 py-2">@author_Username</td>
-          <td className="text-left px-3 py-2">list of tags</td>
-          <td className="text-left px-3 py-2">
-            First 20 words of article body
-          </td>
-          <td className="text-left px-3 py-2">June 11 ,2019</td>
-          <td className="text-left px-3 py-2">
-            <button>...</button>
-          </td>
-        </tr>
+        <tbody>
+          {articles.map((item, index) => (
+            <tr key={index}>
+              <td className="text-left px-3 py-2">{index}</td>
+              <td className="text-left px-3 py-2">{item.title}</td>
+              
+              <td className="text-left px-3 py-2">{item.author && item.author.username?item.author.username:""}</td>
+              <td className="text-left px-3 py-2">{item.tagList.toString()}</td>
+              <td className="text-left px-3 py-2">
+                {item.slug}
+              </td>
+              <td className="text-left px-3 py-2">{convertHelpers.dateConvert(item.createdAt)}</td>
+              <td className="text-left px-3 py-2">
+                <button>...</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
