@@ -7,6 +7,7 @@ import Loading from "../components/modules/Loading";
 
 const AllPostScreen = () => {
   const [articles, setArticles] = useState([]);
+  const [articlesCount, setArticlesCount] = useState(0);
 
   const { isLoading, isError, data, error } = useQuery(
     "Articles",
@@ -26,6 +27,7 @@ const AllPostScreen = () => {
  
         if (data&& data.data && data.data.articles) {
           setArticles(data.data.articles);
+          setArticlesCount(data.data.articlesCount);
         }
       }
     }
