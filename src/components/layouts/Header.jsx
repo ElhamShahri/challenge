@@ -1,4 +1,15 @@
+import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const client = useQueryClient();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    client.removeQueries();
+    navigate("/login");
+  };
+  
   return (
     <header className="h-[60px] bg-charcoal-grey px-5 flex flex-row justify-between items-center  ">
       <div className="flex flex-col  md:flex-row  md:items-center">
@@ -7,7 +18,10 @@ const Header = () => {
           {"Wellcom " + localStorage.getItem("username")}
         </span>
       </div>
-      <button className=" py-2 px-4 text-base bg-charcoal-grey text-dark-sky-blue border border-1 border-dark-sky-blue rounded">
+      <button
+        className=" py-2 px-4 text-base bg-charcoal-grey text-dark-sky-blue border border-1 border-dark-sky-blue rounded"
+        onClick={logout}
+      >
         Logout
       </button>
     </header>
