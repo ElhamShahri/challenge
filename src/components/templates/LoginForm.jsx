@@ -44,7 +44,15 @@ const Login = () => {
 
   const mutation = useMutation(async (user) => {
     const data = await LoginService(user);
+
     console.log(data.data.user.token);
+    localStorage.setItem("isLogin", true);
+    localStorage.setItem("username", data.data.user.username);
+    localStorage.setItem("token", data.data.user.token);
+
+    navigate("/", {
+      replace: true,
+    });
   });
 
   return (
@@ -65,11 +73,11 @@ const Login = () => {
         Email
       </label>
       <input
-        className="mb-3 rounded p-2 border border-1 border-[#dddddd] "
+        className="mb-2 rounded p-2 border border-1 border-[#dddddd] "
         {...formik.getFieldProps("email")}
         name="email"
       />
-      <div className="mb-7 ms-2">
+      <div className="mb-6 ms-2">
         {formik.errors.email && formik.touched.email && (
           <div className="w-full text-brick ">{formik.errors.email}</div>
         )}
@@ -77,7 +85,7 @@ const Login = () => {
 
       <label
         className={`mb-2 ms-2 ${
-          formik.errors.email && formik.touched.email
+          formik.errors.password && formik.touched.password
             ? `text-brick`
             : `text-charcoal-grey`
         }`}
@@ -85,18 +93,18 @@ const Login = () => {
         Password
       </label>
       <input
-        className="mb-3 rounded p-2 border border-1 border-[#dddddd]"
+        className="mb-2 rounded p-2 border border-1 border-[#dddddd]"
         {...formik.getFieldProps("password")}
         name="password"
       />
-      <div className="mb-7 ms-2">
+      <div className="mb-6 ms-2">
         {formik.errors.password && formik.touched.password && (
           <div className="w-full text-brick ">{formik.errors.password}</div>
         )}
       </div>
 
       {mutation.isLoading ? (
-        <Loading/>
+        <Loading />
       ) : (
         <button
           className="bg-water-blue text-white rounded py-2 "
@@ -107,7 +115,9 @@ const Login = () => {
       )}
       <div className="mt-4 mb-5 ms-2 text-charcoal-grey">
         Dont have account?{" "}
-        <span className="font-bold cursor-pointer  ms-1 text-charcoal-grey">
+        <span className="font-bold cursor-pointer  ms-1 text-charcoal-grey"     onClick={() => {
+            navigate("/register");
+          }}>
           Register
         </span>
       </div>

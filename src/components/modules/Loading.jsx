@@ -6,7 +6,6 @@ function Loading({ width = "75", height = "40" }) {
       height={height}
       width={width}
       radius={9}
-      //   color="rgb(var(--color-primary-900))"
       color="#1c7cd5"
       wrapperStyle={{
         display: "flex",
