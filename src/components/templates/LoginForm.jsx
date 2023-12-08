@@ -49,10 +49,7 @@ const Login = () => {
     localStorage.setItem("isLogin", true);
     localStorage.setItem("username", data.data.user.username);
     localStorage.setItem("token", data.data.user.token);
-
-    navigate("/", {
-      replace: true,
-    });
+    navigate("/");
   });
 
   return (
@@ -115,9 +112,12 @@ const Login = () => {
       )}
       <div className="mt-4 mb-5 ms-2 text-charcoal-grey">
         Dont have account?{" "}
-        <span className="font-bold cursor-pointer  ms-1 text-charcoal-grey"     onClick={() => {
+        <span
+          className="font-bold cursor-pointer  ms-1 text-charcoal-grey"
+          onClick={() => {
             navigate("/register");
-          }}>
+          }}
+        >
           Register
         </span>
       </div>

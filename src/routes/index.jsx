@@ -6,9 +6,6 @@ import RegisterScreen from "../pages/RegisterScreen";
 import NewArticle from "../pages/NewArticleScreen";
 import AllPostScreen from "../pages/AllPostScreen";
 
-
-
-
 export default function ArvanRoutes() {
   return (
     <Routes>
