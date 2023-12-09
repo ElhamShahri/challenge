@@ -1,7 +1,9 @@
 import axios from "axios";
 
-
 axios.defaults.baseURL = "https://api.realworld.io/api";
+
+axios.defaults.headers.common["Authorization"] =
+  "Token " + localStorage.getItem("token");
 
 axios.interceptors.request.use(
   (request) => {
