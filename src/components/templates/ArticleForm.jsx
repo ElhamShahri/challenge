@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Tags from "../modules/Tags";
+import { useMutation } from "react-query";
+import { createArticle } from "../../services/articleService";
+import Loading from "../modules/Loading";
 
 const ArticleForm = ({ tags }) => {
   const [selectedTag, setSelectedTag] = useState([]);
-
   const [newArticle, setNewArticle] = useState({});
 
   const selectedTagsHandler = (data) => {
@@ -21,8 +23,19 @@ const ArticleForm = ({ tags }) => {
     console.log(newArticle);
   }, [newArticle]);
 
+  const mutation = useMutation(async (article) => {
+    const data = await createArticle(article);
+    console.log(data);
+  });
+
   const addArticleHandler = () => {
     console.log(selectedTag);
+    mutation.mutate({
+      title: newArticle.title,
+      description: newArticle.description,
+      body: newArticle.body,
+      tagList: selectedTag,
+    });
   };
 
   return (
@@ -36,7 +49,7 @@ const ArticleForm = ({ tags }) => {
               <input
                 className=" rounded p-2 border border-1 border-[#dddddd]"
                 placeholder="Title"
-                name="Title"
+                name="title"
                 onChange={handleInputChange}
               />
               <div className="mt-1 ">{/* console.error(); */}</div>
@@ -46,14 +59,14 @@ const ArticleForm = ({ tags }) => {
             <input
               className="mb-6 rounded p-2 border border-1 border-[#dddddd]"
               placeholder="Description"
-              name="Description"
+              name="description"
               onChange={handleInputChange}
             />
             <label className="mb-3 ms-1 text-charcoal-grey">Body</label>
             <textarea
               className="mb-3 rounded p-2 border border-1 border-[#dddddd]"
               rows="6"
-              name="Body"
+              name="body"
               onChange={handleInputChange}
             ></textarea>
           </div>
@@ -62,13 +75,21 @@ const ArticleForm = ({ tags }) => {
             <Tags data={tags} onTagFormChild={selectedTagsHandler} />
           </div>
         </div>
-        <button
-          type="button"
-          className="mb-4 bg-water-blue px-6 py-2 rounded text-white"
-          onClick={addArticleHandler}
-        >
-          submit
-        </button>
+
+        {mutation.isLoading ? (
+          <div className="w-20">
+                  <Loading />
+          </div>
+    
+        ) : (
+          <button
+            type="button"
+            className="mb-4 bg-water-blue px-6 py-2 rounded text-white"
+            onClick={addArticleHandler}
+          >
+            submit
+          </button>
+        )}
       </form>
     </div>
   );

@@ -4,16 +4,20 @@ export function getArticles() {
   return http.get("/articles");
 }
 
-export function editArticle(slug,article) {
-    return http.put(`/articles/${slug}`, {
-        article: article,
-    });
-  }
+export function editArticle(slug, article) {
+  return http.put(`/articles/${slug}`, {
+    article: article,
+  });
+}
 
-  export function deleteArticle(slug) {
-    return http.delete(`/articles/${slug}`);
-  }
+export function deleteArticle(slug) {
+  return http.delete(`/articles/${slug}`);
+}
 
-  export function getTags() {
-    return http.get("/tags");
-  }
+export function createArticle(article) {
+  return http.post("/articles", { article: article });
+}
+
+export function getTags() {
+  return http.get("/tags");
+}
