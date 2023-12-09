@@ -35,7 +35,7 @@ const ArticleForm = ({ tags }) => {
             <Tags data={tags} />
           </div>
         </div>
-        <button className="mb-4 bg-water-blue px-6 py-2 rounded text-white">
+        <button type="button" className="mb-4 bg-water-blue px-6 py-2 rounded text-white">
           submit
         </button>
       </form>
