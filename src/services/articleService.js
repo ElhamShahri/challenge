@@ -4,8 +4,10 @@ export function getArticles() {
   return http.get("/articles");
 }
 
-export function editArticle(slug, article) {
-  return http.put(`/articles/${slug}`, {
+export function editArticle( article) {
+  console.log(`/articles/${article.slug}`)
+  
+  return http.put(`/articles/${article.slug}`, {
     article: article,
   });
 }
