@@ -3,10 +3,14 @@ import Tags from "../modules/Tags";
 import { useMutation } from "react-query";
 import { createArticle } from "../../services/articleService";
 import Loading from "../modules/Loading";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const ArticleForm = ({ tags }) => {
+  const navigate = useNavigate();
   const [selectedTag, setSelectedTag] = useState([]);
   const [newArticle, setNewArticle] = useState({});
+
 
   const selectedTagsHandler = (data) => {
     setSelectedTag(data);
@@ -25,6 +29,10 @@ const ArticleForm = ({ tags }) => {
 
   const mutation = useMutation(async (article) => {
     const data = await createArticle(article);
+    if (data.data && data.data.article ) {
+      navigate("/")
+      toast.success("Article added successfully");
+    }
     console.log(data);
   });
 
@@ -78,9 +86,8 @@ const ArticleForm = ({ tags }) => {
 
         {mutation.isLoading ? (
           <div className="w-20">
-                  <Loading />
+            <Loading />
           </div>
-    
         ) : (
           <button
             type="button"

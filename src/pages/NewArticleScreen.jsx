@@ -6,9 +6,6 @@ import { useQuery } from "react-query";
 
 const NewArticle = () => {
   const [tags, setTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState({});
-  const [newArticle, setNewArticle] = useState({});
-
   const { isLoading, isError, data, error } = useQuery("Tags", getTags, {
     onSuccess: (data) => {
       console.log("Get data!");
