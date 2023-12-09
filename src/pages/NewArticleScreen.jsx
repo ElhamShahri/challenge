@@ -6,6 +6,8 @@ import { useQuery } from "react-query";
 
 const NewArticle = () => {
   const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState({});
+  const [newArticle, setNewArticle] = useState({});
 
   const { isLoading, isError, data, error } = useQuery("Tags", getTags, {
     onSuccess: (data) => {
@@ -25,13 +27,15 @@ const NewArticle = () => {
     fetchTags();
   }, [data]);
 
+  
+
   return (
     <MainLayout>
       <div className="w-full h-full py-6 px-7">
         <div className="mb-7">
           <label className="text-4xl">New Article</label>
         </div>
-        <ArticleForm tags={tags} />
+        <ArticleForm tags={tags}  />
       </div>
     </MainLayout>
   );
