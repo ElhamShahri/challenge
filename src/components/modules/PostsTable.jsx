@@ -13,7 +13,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { deleteArticle } from "../../services/articleService";
 import { toast } from "react-hot-toast";
 
-
 const PostsTable = ({ articles }) => {
   const navigate = useNavigate();
   const client = useQueryClient();
@@ -32,8 +31,12 @@ const PostsTable = ({ articles }) => {
 
   useEffect(() => {}, [deleteSlug]);
 
-  const handleEdit = () => {
-    navigate("/article/create");
+  const handleEdit = (article) => {
+    navigate(`/article/edit/${article.slug}`, {
+      state: {
+        article: article,
+      },
+    });
   };
 
   const handleDelete = (slug) => {
@@ -85,7 +88,7 @@ const PostsTable = ({ articles }) => {
               </td>
               <td className="text-left px-3 py-2">
                 <Menue
-                  handleEdit={handleEdit}
+                  handleEdit={() => handleEdit(item)}
                   handleDelete={() => handleDelete(item.slug)}
                 />
               </td>

@@ -22,7 +22,8 @@ const Sidebar = () => {
         </li>
         <li
           className={`py-3 px-8  cursor-pointer ${
-            path == "/article/create" && `bg-white bg-opacity-20`
+            (path == "/article/create" || path.split("/")[2] == "edit") &&
+            `bg-white bg-opacity-20`
           }`}
           onClick={() => {
             navigate("/article/create");

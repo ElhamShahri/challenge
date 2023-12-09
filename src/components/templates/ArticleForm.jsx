@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import Tags from "../modules/Tags";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createArticle } from "../../services/articleService";
 import Loading from "../modules/Loading";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-const client = useQueryClient();
 
-const ArticleForm = ({ tags }) => {
+const ArticleForm = ({ tags, article }) => {
   const navigate = useNavigate();
-  const [selectedTag, setSelectedTag] = useState([]);
-  const [newArticle, setNewArticle] = useState({});
+  const client = useQueryClient();
 
+  const [selectedTag, setSelectedTag] = useState([]);
+  const [newArticle, setNewArticle] = useState(article);
 
   const selectedTagsHandler = (data) => {
     setSelectedTag(data);
@@ -30,9 +30,9 @@ const ArticleForm = ({ tags }) => {
 
   const mutation = useMutation(async (article) => {
     const data = await createArticle(article);
-    if (data.data && data.data.article ) {
+    if (data.data && data.data.article) {
       client.invalidateQueries("Articles");
-      navigate("/")
+      navigate("/");
       toast.success("Article added successfully");
     }
     console.log(data);
@@ -59,6 +59,7 @@ const ArticleForm = ({ tags }) => {
               <input
                 className=" rounded p-2 border border-1 border-[#dddddd]"
                 placeholder="Title"
+                defaultValue={newArticle&& newArticle.title}
                 name="title"
                 onChange={handleInputChange}
               />
@@ -69,6 +70,7 @@ const ArticleForm = ({ tags }) => {
             <input
               className="mb-6 rounded p-2 border border-1 border-[#dddddd]"
               placeholder="Description"
+              defaultValue={newArticle&& newArticle.description}
               name="description"
               onChange={handleInputChange}
             />
@@ -76,6 +78,7 @@ const ArticleForm = ({ tags }) => {
             <textarea
               className="mb-3 rounded p-2 border border-1 border-[#dddddd]"
               rows="6"
+              defaultValue={newArticle&& newArticle.body}
               name="body"
               onChange={handleInputChange}
             ></textarea>

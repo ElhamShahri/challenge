@@ -3,8 +3,13 @@ import MainLayout from "../components/layouts/MainLayout";
 import ArticleForm from "../components/templates/ArticleForm";
 import { getTags } from "../services/articleService";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 
 const NewArticle = () => {
+  const location = useLocation();
+  const article = location.state.article;
+ 
+
   const [tags, setTags] = useState([]);
   const { isLoading, isError, data, error } = useQuery("Tags", getTags, {
     onSuccess: (data) => {
@@ -24,15 +29,13 @@ const NewArticle = () => {
     fetchTags();
   }, [data]);
 
-  
-
   return (
     <MainLayout>
       <div className="w-full h-full py-6 px-7">
         <div className="mb-7">
-          <label className="text-4xl">New Article</label>
+          <label className="text-4xl">Edit Article</label>
         </div>
-        <ArticleForm tags={tags} article={null} />
+        <ArticleForm tags={tags} article={article} />
       </div>
     </MainLayout>
   );
