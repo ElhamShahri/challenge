@@ -7,30 +7,51 @@ import DialogTitle from "@mui/material/DialogTitle";
 import convertHelpers from "../../utils/helpers/convert.helpers";
 import PaginationRounded from "./PaginationRounded";
 import Menue from "./menue";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Divider } from "@mui/material";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteArticle } from "../../services/articleService";
+import { toast } from "react-hot-toast";
+
 
 const PostsTable = ({ articles }) => {
   const navigate = useNavigate();
+  const client = useQueryClient();
+
   const [openAlertDialog, setOpenAlertDialog] = useState(false);
+  const [deleteSlug, setDeleteSlug] = useState(null);
+
+  const mutation = useMutation(async (slug) => {
+    const data = await deleteArticle(slug);
+    if (data.data == "") {
+      client.invalidateQueries("Articles");
+      toast.success("Article deleted successfully");
+    }
+    handleCloseAlertDialog();
+  });
+
+  useEffect(() => {}, [deleteSlug]);
 
   const handleEdit = () => {
     navigate("/article/create");
   };
 
-  const handleDelete = () => {
+  const handleDelete = (slug) => {
     setOpenAlertDialog(true);
+    setDeleteSlug(slug);
   };
 
   const handleCloseAlertDialog = () => {
     setOpenAlertDialog(false);
+    setDeleteSlug(null);
   };
 
   const confirmDeleteHandler = () => {
-    // Display an alert dialog on Delete click
-    alert("Are you sure you want to delete?");
+    if (deleteSlug) {
+      console.log(deleteSlug);
+      mutation.mutate(deleteSlug);
+    }
   };
-  confirmDeleteHandler;
 
   return (
     <div className="w-full ">
@@ -63,8 +84,10 @@ const PostsTable = ({ articles }) => {
                 {convertHelpers.dateConvert(item.createdAt)}
               </td>
               <td className="text-left px-3 py-2">
-                {/* <button>...</button> */}
-                <Menue handleEdit={handleEdit} handleDelete={handleDelete} />
+                <Menue
+                  handleEdit={handleEdit}
+                  handleDelete={() => handleDelete(item.slug)}
+                />
               </td>
             </tr>
           ))}
@@ -78,9 +101,9 @@ const PostsTable = ({ articles }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          '& .MuiDialog-paper': {
-            width: '500px', // Adjust the width as per your requirement
-            maxWidth: '90vw', // Maximum width, responsive approach
+          "& .MuiDialog-paper": {
+            width: "500px", // Adjust the width as per your requirement
+            maxWidth: "90vw", // Maximum width, responsive approach
           },
         }}
       >
@@ -103,7 +126,7 @@ const PostsTable = ({ articles }) => {
             Are you sure to delete Article
           </DialogContentText>
         </DialogContent>
-        <Divider sx={{ mt: 3,mb:0.2 }} />
+        <Divider sx={{ mt: 3, mb: 0.2 }} />
         <DialogActions>
           <div className="px-4 flex flex-row gap-4">
             <button
