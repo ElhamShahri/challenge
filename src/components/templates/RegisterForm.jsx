@@ -75,7 +75,11 @@ const RegisterForm = () => {
         User
       </label>
       <input
-        className="mb-2 rounded p-2 border border-1 border-[#dddddd]"
+        className={`mb-2 rounded p-2 border border-1 ${
+          formik.errors.username && formik.touched.username
+            ? `border-brick outline-brick`
+            : `border-[#dddddd] outline-charcoal-grey`
+        }`}
         {...formik.getFieldProps("username")}
         name="username"
       />
@@ -94,7 +98,11 @@ const RegisterForm = () => {
         Email
       </label>
       <input
-        className="mb-2 rounded p-2 border border-1 border-[#dddddd]"
+        className={`mb-2 rounded p-2 border border-1 ${
+          formik.errors.email && formik.touched.email
+            ? `border-brick outline-brick`
+            : `border-[#dddddd] outline-charcoal-grey`
+        }`}
         {...formik.getFieldProps("email")}
         name="email"
       />
@@ -113,7 +121,11 @@ const RegisterForm = () => {
         Password
       </label>
       <input
-        className="mb-2 rounded p-2 border border-1 border-[#dddddd]"
+        className={`mb-2 rounded p-2 border border-1 ${
+          formik.errors.password && formik.touched.password
+            ? `border-brick outline-brick`
+            : `border-[#dddddd] outline-charcoal-grey`
+        }`}
         {...formik.getFieldProps("password")}
         name="password"
       />

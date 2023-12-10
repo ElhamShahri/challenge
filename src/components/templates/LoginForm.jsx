@@ -70,7 +70,12 @@ const Login = () => {
         Email
       </label>
       <input
-        className="mb-2 rounded p-2 border border-1 border-[#dddddd] "
+          className={`mb-2 rounded p-2 border border-1 ${
+            formik.errors.email && formik.touched.email
+              ? `border-brick outline-brick`
+              : `border-[#dddddd] outline-charcoal-grey`
+          }`}
+  
         {...formik.getFieldProps("email")}
         name="email"
       />
@@ -90,7 +95,11 @@ const Login = () => {
         Password
       </label>
       <input
-        className="mb-2 rounded p-2 border border-1 border-[#dddddd]"
+        className={`mb-2 rounded p-2 border border-1 ${
+          formik.errors.password && formik.touched.password
+            ? `border-brick outline-brick`
+            : `border-[#dddddd] outline-charcoal-grey`
+        }`}
         {...formik.getFieldProps("password")}
         name="password"
       />
