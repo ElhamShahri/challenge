@@ -96,7 +96,10 @@ const PostsTable = ({ articles }) => {
           ))}
         </tbody>
       </table>
+      <div className="flex flex-row justify-center items-center py-5">
       <PaginationRounded />
+      </div>
+    
       <Dialog
         dir="ltr"
         open={openAlertDialog}

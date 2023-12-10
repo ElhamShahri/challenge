@@ -11,7 +11,7 @@ const Header = () => {
   };
   
   return (
-    <header className="h-[60px] bg-charcoal-grey px-5 flex flex-row justify-between items-center  ">
+    <header className="h-[60px] w-full bg-charcoal-grey px-5 flex flex-row justify-between items-center fixed ">
       <div className="flex flex-col  md:flex-row  md:items-center">
         <span className="me-5 text-white text-xl">Arvan Challenge</span>
         <span className="text-white text-base">

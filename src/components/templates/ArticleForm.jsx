@@ -65,7 +65,7 @@ const ArticleForm = ({ tags, article }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <form>
         <div className="flex flex-col md:flex-row ">
           {/* form */}
