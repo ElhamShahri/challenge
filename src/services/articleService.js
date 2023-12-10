@@ -1,7 +1,8 @@
 import http from "./httpService";
 
-export function getArticles() {
+export function getArticles(page) {
   return http.get("/articles");
+  // return http.get(`/articles/page/${2}`);
 }
 
 export function editArticle( article) {

@@ -5,20 +5,34 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import convertHelpers from "../../utils/helpers/convert.helpers";
-import PaginationRounded from "./PaginationRounded";
 import Menue from "./menue";
 import { useEffect, useState } from "react";
 import { Divider } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteArticle } from "../../services/articleService";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
 
-const PostsTable = ({ articles }) => {
+const PostsTable = ({ articles, articlesCount, handlepageChange }) => {
   const navigate = useNavigate();
   const client = useQueryClient();
+  const PAGE_SIZE = 10;
 
   const [openAlertDialog, setOpenAlertDialog] = useState(false);
   const [deleteSlug, setDeleteSlug] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageCount = Math.ceil(articlesCount / PAGE_SIZE);
+
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected + 1);
+  };
+
+  useEffect(() => {
+    if (currentPage) {
+      handlepageChange(currentPage);
+      console.log(currentPage);
+    }
+  }, [currentPage]);
 
   const mutation = useMutation(async (slug) => {
     const data = await deleteArticle(slug);
@@ -96,10 +110,26 @@ const PostsTable = ({ articles }) => {
           ))}
         </tbody>
       </table>
-      <div className="flex flex-row justify-center items-center py-5">
-      <PaginationRounded />
+      <div className="flex justify-center mt-4 text-lg ">
+        <ReactPaginate
+          previousLabel={
+            <span className="text-[#373a3c] hover:text-[#1c7cd5] ">befor</span>
+          }
+          nextLabel={
+            <span className="text-[#373a3c] hover:text-[#1c7cd5]">after</span>
+          }
+          pageCount={pageCount}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={2}
+          onPageChange={handlePageClick}
+          pageLinkClassName="block p-1 text-[#373a3c] hover:text-[#fff]"
+          containerClassName="flex justify-center items-center gap-2 mt-4"
+          pageClassName="rounded-lg bg-[#eceeef] px-1  hover:bg-[#1c7cd5]"
+          activeClassName="bg-[#1c7cd5] rounded px-1 text-[#fff]" // Updated class
+          disabledClassName="opacity-50 cursor-not-allowed"
+        />
       </div>
-    
+
       <Dialog
         dir="ltr"
         open={openAlertDialog}
